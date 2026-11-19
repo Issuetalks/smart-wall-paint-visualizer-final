@@ -1,0 +1,28 @@
+<div class="editor-container">
+  <div class="editor-header">
+    <h2>Editing: {{ project?.title || 'Loading...' }}</h2>
+    
+    <!-- Color Picker for the brush -->
+    <div class="tools">
+      <label>Paint Color: </label>
+      <input type="color" [value]="brushColor" (input)="changeColor($event)">
+      <label style="margin-left: 15px;">Brush Size: </label>
+      <input type="range" min="5" max="80" [(ngModel)]="brushSize" style="cursor: pointer;">
+    </div>
+
+    <button class="back-btn" routerLink="/dashboard">Back to Dashboard</button>
+    <button class="save-btn" (click)="downloadImage()">Download Image</button>
+    <button class="clear-btn" (click)="clearCanvas()">Clear Paint</button>
+    <button class="save-btn" (click)="saveDesign()" style="background-color: #3b82f6;">Save Design</button>
+  </div>
+
+  <div class="canvas-container">
+    <!-- The Canvas replaces the img tag! -->
+    <canvas #canvas 
+            (mousedown)="startDrawing($event)" 
+            (mousemove)="draw($event)" 
+            (mouseup)="stopDrawing()" 
+            (mouseleave)="stopDrawing()">
+    </canvas>
+  </div>
+</div>

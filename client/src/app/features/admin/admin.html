@@ -1,0 +1,26 @@
+<div class="admin-container">
+  <h2>Admin Dashboard - All User Projects (Total: {{ projects.length }})</h2>
+  <button routerLink="/dashboard" class="back-btn">Back to App</button>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>User Email</th>
+        <th>Project Title</th>
+        <th>Image</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of projects">
+        <!-- Use a fallback in case the user email wasn't populated -->
+        <td>{{ p.user?.email || 'Unknown User' }}</td>
+        <td>{{ p.title }}</td>
+        <td>
+          <img [src]="p.paintedImage ? p.paintedImage : 'http://localhost:5000' + p.originalImage" width="60" height="60" style="object-fit: cover; border-radius: 4px;">
+        </td>
+        <td>{{ p.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
